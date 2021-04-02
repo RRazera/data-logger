@@ -26,6 +26,7 @@ app.use(express.json())
 app.use(userRouter)
 app.use(experimentRouter)
 
+
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Data Logger',

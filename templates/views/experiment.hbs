@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/experiment-styles.css">
+        <script>
+            const exp = {{{expstring}}}
+        </script>
+    </head>
+    
+    <body>
+        <div class="main-content">
+            {{>header}}
+            
+            <div class="add-result">
+                <form id="add-result-form">
+                    <input type="file" name="file-input" textarea="picture" accept="image/png, image/jpeg">
+                    <button type="submit">Add result</button>
+                </form>
+            </div>
+        </div>
+
+        {{>footer}}
+        <script src="../js/experiment.js"></script>
+    </body>
+</html>

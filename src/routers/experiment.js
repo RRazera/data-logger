@@ -29,12 +29,18 @@ router.get('/experiments/:id', async (req, res) => {
 
     try {
         const experiment = await Experiment.findById(_id)
+        const experimentJSON = JSON.stringify(experiment)
 
         if (!experiment) {
             return res.status(404).send()
         }
 
-        res.send(experiment)
+        res.render('experiment', {
+            title: experiment.description,
+            name: 'Ricardo Razera',
+            expstring: experimentJSON
+        })
+        // res.send(experiment)
     } catch (e) {
         res.status(500).send(e)
     }
