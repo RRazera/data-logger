@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const Experiment = mongoose.model('Experiment', {
+const experimentSchema = mongoose.Schema({
     description: {
         type: String,
         required: true,
@@ -12,5 +12,13 @@ const Experiment = mongoose.model('Experiment', {
         default: false
     }
 })
+
+experimentSchema.virtual('results', {
+    ref: 'Result',
+    localField: '_id',
+    foreignField: 'experiment'
+})
+
+const Experiment = mongoose.model('Experiment', experimentSchema)
 
 module.exports = Experiment

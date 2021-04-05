@@ -1,16 +1,22 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const Result = mongoose.model('Result', {
+const resultSchema = new mongoose.Schema({
     picture: {
-        type: String,
+        type: Buffer,
+        required: false
+    },
+    experiment: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        trim: true
+        ref: 'Experiment'
     },
     comments: {
         type: String,
-        default: false
+        required: false
     }
 })
 
-module.exports = Experiment
+const Result = mongoose.model('Result', resultSchema)
+
+module.exports = Result

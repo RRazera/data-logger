@@ -4,6 +4,7 @@ const hbs = require('hbs')
 require('./db/mongoose')
 const userRouter = require('./routers/user')
 const experimentRouter = require('./routers/experiment')
+const resultRouter = require('./routers/result')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -25,7 +26,7 @@ app.use(express.json())
 
 app.use(userRouter)
 app.use(experimentRouter)
-
+app.use(resultRouter)
 
 app.get('', (req, res) => {
     res.render('index', {
