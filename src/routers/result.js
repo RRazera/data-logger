@@ -17,7 +17,6 @@ const upload = multer({
 })
 
 router.post('/result', upload.single('upload'), async (req, res) => {
-    console.log(req.body)
     const result = new Result({
         picture: req.file.buffer,
         experiment: req.body.experiment,
@@ -28,7 +27,7 @@ router.post('/result', upload.single('upload'), async (req, res) => {
     try {
         await result.save()
 
-        res.status(201).send()
+        res.status(201).redirect('/experiments/' + req.body.experiment)
     } catch (e) {
         res.status(500).send(e)
     }
@@ -71,7 +70,7 @@ router.get('/result/:id/pic', async (req, res) => {
         res.set('Content-Type', 'image/jpg')
         res.send(result.picture)
     } catch (e) {
-        res.status(500).send(e)
+        res.status(404).send(e)
     }
 })
 

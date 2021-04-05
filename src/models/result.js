@@ -4,7 +4,7 @@ const validator = require('validator')
 const resultSchema = new mongoose.Schema({
     picture: {
         type: Buffer,
-        required: false
+        required: true
     },
     experiment: {
         type: mongoose.Schema.Types.ObjectId,

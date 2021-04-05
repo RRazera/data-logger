@@ -1,4 +1,4 @@
-let div = document.getElementById("add-result-div");
+const div = document.getElementById("add-result-div");
 div.style.display = 'none';
 
 const hideDiv = () => {
@@ -10,3 +10,6 @@ const hideDiv = () => {
         div.style.display = "none";
     }
 }
+
+console.log(exp)
+console.log(results)
