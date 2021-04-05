@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+const bodyParser = require('body-parser')
 const hbs = require('hbs')
 require('./db/mongoose')
 const userRouter = require('./routers/user')
@@ -23,6 +24,7 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirPath))
 
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(userRouter)
 app.use(experimentRouter)

@@ -14,10 +14,14 @@
         <div class="main-content">
             {{>header}}
             
-            <div class="add-result">
-                <form id="add-result-form">
-                    <input type="file" name="file-input" textarea="picture" accept="image/png, image/jpeg">
-                    <button type="submit">Add result</button>
+            <button id="add-result-button" onclick="hideDiv()">New Result</button>
+            <div class="add-result" id="add-result-div">
+                <form id="add-result-form" action="/result" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="upload" id="add-file" accept="image/png, image/jpg, image/jpeg"> <br>
+                    <input type="text" name="conditions" id="add-condition" placeholder="First condition"> <br>
+                    <input type="text" name="comments" id="add-comment" placeholder="First comment"> <br>
+                    <input type="hidden" name="experiment" id="experiment-id" value="60632258a3782916e8b85851">
+                    <input type="submit" value="Submit">
                 </form>
             </div>
         </div>

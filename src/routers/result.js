@@ -4,18 +4,6 @@ const Experiment = require('../models/experiment')
 const Result = require('../models/result')
 const router = new express.Router()
 
-router.post('/result', async (req, res) => {
-    const result = new Result(req.body)
-
-    try {
-        await result.save()
-
-        res.status(201).send(result)
-    } catch (e) {
-        res.status(500).send(e)
-    }
-})
-
 const upload = multer({
     limits: {
         fileSize: 10000000
@@ -27,6 +15,25 @@ const upload = multer({
         return cb(undefined, true)
     }
 })
+
+router.post('/result', upload.single('upload'), async (req, res) => {
+    console.log(req.body)
+    const result = new Result({
+        picture: req.file.buffer,
+        experiment: req.body.experiment,
+        comments: req.body.comments,
+        conditions: req.body.conditions
+    })
+
+    try {
+        await result.save()
+
+        res.status(201).send()
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 router.post('/result/addResultPic', upload.single('upload'), async (req, res) => {
     try {
         const result = await Result.findById(req.body.id)

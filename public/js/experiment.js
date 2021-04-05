@@ -1,5 +1,12 @@
-const addResultForm = document.getElementById('add-result-form')
+let div = document.getElementById("add-result-div");
+div.style.display = 'none';
 
-addResultForm.addEventListener('click', (event) => {
-    event.preventDefault()
-})
+const hideDiv = () => {
+    let div = document.getElementById("add-result-div");
+
+    if (div.style.display === "none") {
+        div.style.display = "block";
+    } else {
+        div.style.display = "none";
+    }
+}

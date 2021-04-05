@@ -14,6 +14,10 @@ const resultSchema = new mongoose.Schema({
     comments: {
         type: String,
         required: false
+    },
+    conditions: {
+        type: String,
+        required: false
     }
 })
 
