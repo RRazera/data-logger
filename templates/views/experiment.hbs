@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/experiment-styles.css">
     <script>
         const exp = {{{ expstring }}}
-        const results = {{{results}}}
+        const res = {{{ results }}}
     </script>
 </head>
 
@@ -28,7 +28,15 @@
         </div>
 
         <div class="results">
-            {{!-- <img src="/result/606b72976fdb6e1de063dd37/pic" alt="no image provided"> --}}
+            <ul>
+                {{#each resultsArray}}
+                    <li>
+                        <img src="/result/{{this._id}}/pic" alt="no image provided">
+                        <p>{{this.conditions}}</p>
+                        <p>{{this.comments}}</p>
+                    </li>
+                {{/each}}
+            </ul>
             
         </div>
     </div>

@@ -12,4 +12,4 @@ const hideDiv = () => {
 }
 
 console.log(exp)
-console.log(results)
+console.log(res)

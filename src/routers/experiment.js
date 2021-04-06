@@ -37,14 +37,15 @@ router.get('/experiments/:id', async (req, res) => {
         await experiment.populate('results').execPopulate()
 
         const experimentJSON = JSON.stringify(experiment)
-        const results = JSON.stringify(experiment.results)
+        const results = experiment.results
 
         res.render('experiment', {
             title: experiment.description,
             name: 'Ricardo Razera',
             expId: experiment._id,
             expstring: experimentJSON,
-            results
+            resultsArray: results,
+            results: JSON.stringify(results)
         })
     } catch (e) {
         res.status(500).send(e)
