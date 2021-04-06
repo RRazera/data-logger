@@ -31,10 +31,11 @@ app.use(experimentRouter)
 app.use(resultRouter)
 
 app.get('', (req, res) => {
-    res.render('index', {
-        title: 'Data Logger',
-        name: 'Ricardo Razera'
-    })
+    // res.render('index', {
+    //     title: 'Data Logger',
+    //     name: 'Ricardo Razera'
+    // })
+    res.redirect('/experiments')
 })
 
 app.get('/about', (req, res) => {

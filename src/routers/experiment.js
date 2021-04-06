@@ -8,7 +8,7 @@ router.post('/experiments', async (req, res) => {
     try {
         await experiment.save()
 
-        res.status(201).send(experiment)
+        res.status(201).redirect('/experiments')
     } catch (e) {
         res.status(500).send(e)
     }
@@ -18,7 +18,11 @@ router.get('/experiments', async (req, res) => {
     try {
         const experiments = await Experiment.find({})
 
-        res.send(experiments)
+        res.render('project', {
+            title: 'Project Page',
+            name: 'Ricardo Razera',
+            experiments
+        })
     } catch (e) {
         res.status(404).send(e)
     }
@@ -40,7 +44,7 @@ router.get('/experiments/:id', async (req, res) => {
         const results = experiment.results
 
         res.render('experiment', {
-            title: experiment.description,
+            title: experiment.name,
             name: 'Ricardo Razera',
             expId: experiment._id,
             expstring: experimentJSON,

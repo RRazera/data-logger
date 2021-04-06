@@ -1,5 +1,6 @@
 const express = require('express')
 const multer = require('multer')
+const sharp = require('sharp')
 const Experiment = require('../models/experiment')
 const Result = require('../models/result')
 const router = new express.Router()
@@ -17,14 +18,16 @@ const upload = multer({
 })
 
 router.post('/result', upload.single('upload'), async (req, res) => {
-    const result = new Result({
-        picture: req.file.buffer,
-        experiment: req.body.experiment,
-        comments: req.body.comments,
-        conditions: req.body.conditions
-    })
-
     try {
+        const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer()
+
+        const result = new Result({
+            picture: buffer,
+            experiment: req.body.experiment,
+            comments: req.body.comments,
+            conditions: req.body.conditions
+        })
+
         await result.save()
 
         res.status(201).redirect('/experiments/' + req.body.experiment)
@@ -67,7 +70,7 @@ router.get('/result/:id/pic', async (req, res) => {
             throw new Error()
         }
 
-        res.set('Content-Type', 'image/jpg')
+        res.set('Content-Type', 'image/png')
         res.send(result.picture)
     } catch (e) {
         res.status(404).send(e)

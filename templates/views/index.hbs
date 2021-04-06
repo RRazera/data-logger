@@ -14,9 +14,9 @@
 
         <div class="experiments">
             <ul>
-                <li> <a href="/experiments/606b7a048597ea39b0adca25">Policarboxilato</a></li>
-                <li>Gesso</li>
-                <li>Maior densidade</li>
+                {{#each experiments}}
+                    <li> <a href="/experiments/{{this._id}}">Policarboxilato</a></li>
+                {{/each}}
             </ul>
         </div>
 
