@@ -8,7 +8,7 @@ const experimentRouter = require('./routers/experiment')
 const resultRouter = require('./routers/result')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 // define paths for Express config
 const publicDirPath = path.join(__dirname, '../public')
