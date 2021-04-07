@@ -77,4 +77,18 @@ router.get('/result/:id/pic', async (req, res) => {
     }
 })
 
+router.delete('/result/:id', async (req, res) => {
+    try {
+        const result = await Result.findByIdAndDelete(req.params.id)
+
+        if (!result) {
+            return res.status(404).send()
+        }
+
+        res.send(result)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 module.exports = router
