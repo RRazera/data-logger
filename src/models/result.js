@@ -11,14 +11,18 @@ const resultSchema = new mongoose.Schema({
         required: true,
         ref: 'Experiment'
     },
-    comments: {
-        type: String,
-        required: false
-    },
-    conditions: {
-        type: String,
-        required: false
-    }
+    comments: [{
+        comment: {
+            type: String,
+            required: false
+        }
+    }],
+    conditions: [{
+        condition: {
+            type: String,
+            required: false
+        }
+    }],
 })
 
 const Result = mongoose.model('Result', resultSchema)

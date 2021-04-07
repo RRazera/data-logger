@@ -32,8 +32,12 @@
                 {{#each resultsArray}}
                     <li>
                         <img src="/result/{{this._id}}/pic" alt="no image provided">
-                        <p>{{this.conditions}}</p>
-                        <p>{{this.comments}}</p>
+                        {{#each this.conditions}}
+                            <p>{{this.condition}}</p>
+                        {{/each}}
+                        {{#each this.comments}}
+                            <p>{{this.comment}}</p>
+                        {{/each}}
                         <button id="{{this._id}}">Delete result</button>
                     </li>
                 {{/each}}
