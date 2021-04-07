@@ -52,6 +52,28 @@ router.post('/result/addResultPic', upload.single('upload'), async (req, res) =>
     res.status(400).send({ error: error.message})
 })
 
+router.patch('/result/:id', async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['comments', 'conditions']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!'})
+    }
+
+    try {
+        const result = await Result.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+        if (!result) {
+            return res.status(404).send()
+        }
+
+        res.send(result)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 router.delete('/result/:id/pic', async (req, res) => {
     try {
         const result = await Result.findById(req.params.id)

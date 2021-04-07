@@ -14,8 +14,12 @@ const hideDiv = () => {
 for (i = 0; i < res.length; i++) {
     const id = res[i]._id
     const resExp = res[i].experiment
+    const resComments = res[i].comments
+    const resConditions = res[i].conditions
 
-    let deleteResultButton = document.getElementById(id)
+    const div = document.getElementById(id)
+
+    let deleteResultButton = div.querySelector('.delete-result')
 
     deleteResultButton.addEventListener('click', (event) => {
         if (confirm('Are you sure you want to delete this result?')) {
@@ -31,5 +35,77 @@ for (i = 0; i < res.length; i++) {
         } else {
             alert('The result was not deleted.')
         }
+    })
+
+    let addConditionDiv = div.querySelector('.add-condition-div')
+    addConditionDiv.style.display = 'none'
+
+    const addConditionButton = div.querySelector('.add-condition-button')
+    addConditionButton.addEventListener('click', (event) => {        
+        if (addConditionDiv.style.display === "none") {
+            addConditionDiv.style.display = "block"
+        } else {
+            addConditionDiv.style.display = "none"
+        }
+    })
+
+    const addConditionForm = div.querySelector('.add-condition-form')
+    addConditionForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const condition = addConditionForm.querySelector('.new-condition').value
+
+        resConditions.push({ condition })
+
+        fetch('/result/' + id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                conditions: resConditions
+            })
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/experiments/' + resExp
+            } else {
+                alert('Something went wrong. Please try again later.')
+            }
+        })
+    })
+
+    let addCommentDiv = div.querySelector('.add-comment-div')
+    addCommentDiv.style.display = 'none'
+
+    const addCommentButton = div.querySelector('.add-comment-button')
+    addCommentButton.addEventListener('click', (event) => {        
+        if (addCommentDiv.style.display === "none") {
+            addCommentDiv.style.display = "block"
+        } else {
+            addCommentDiv.style.display = "none"
+        }
+    })
+
+    const addCommentForm = div.querySelector('.add-comment-form')
+    addCommentForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const comment = addCommentForm.querySelector('.new-comment').value
+
+        resComments.push({ comment })
+
+        fetch('/result/' + id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                comments: resComments
+            })
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/experiments/' + resExp
+            } else {
+                alert('Something went wrong. Please try again later.')
+            }
+        })
     })
 }

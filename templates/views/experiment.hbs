@@ -30,16 +30,34 @@
         <div class="results">
             <ul>
                 {{#each resultsArray}}
-                    <li>
-                        <img src="/result/{{this._id}}/pic" alt="no image provided">
-                        {{#each this.conditions}}
-                            <p>{{this.condition}}</p>
-                        {{/each}}
-                        {{#each this.comments}}
-                            <p>{{this.comment}}</p>
-                        {{/each}}
-                        <button id="{{this._id}}">Delete result</button>
-                    </li>
+                    <div id="{{this._id}}">
+                        <li>
+                            <img src="/result/{{this._id}}/pic" alt="no image provided">
+                            <p>Conditions:</p>
+                            <button class="add-condition-button">Add condition</button>
+                            <div class="add-condition-div">
+                                <form class="add-condition-form">
+                                    <input class="new-condition" type="text" name="conditions" placeholder="new condition">
+                                    <input type="submit" value="Submit">
+                                </form>
+                            </div>
+                            {{#each this.conditions}}
+                                <p>-{{this.condition}}</p>
+                            {{/each}}
+                            <p>Comments:</p>
+                            <button class="add-comment-button">Add comment</button>
+                            <div class="add-comment-div">
+                                <form class="add-comment-form">
+                                    <input class="new-comment" type="text" name="comments" placeholder="new comment">
+                                    <input type="submit" value="Submit">
+                                </form>
+                            </div>
+                            {{#each this.comments}}
+                                <p>-{{this.comment}}</p>
+                            {{/each}}
+                            <button class="delete-result">Delete result</button>
+                        </li>
+                    </div>
                 {{/each}}
             </ul>
             
