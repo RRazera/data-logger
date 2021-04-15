@@ -40,11 +40,10 @@
         <div class="results">
             <ul>
                 {{#each resultsArray}}
-                <div id="{{this._id}}">
+                <div class="add-result" id="{{this._id}}">
                     <li>
-                        <img src="/result/{{this._id}}/pic" alt="no image provided">
-                        <p>Conditions:</p>
-                        <button class="add-condition-button">Add condition</button>
+                        <img src="/result/{{this._id}}/pic" alt="no image provided"><br>
+                        Conditions:<button class="add-condition-button">+</button>
                         <div class="add-condition-div">
                             <form class="add-condition-form">
                                 <input class="new-condition" type="text" name="conditions" placeholder="new condition">
@@ -54,8 +53,7 @@
                         {{#each this.conditions}}
                         <p>-{{this.condition}}</p>
                         {{/each}}
-                        <p>Comments:</p>
-                        <button class="add-comment-button">Add comment</button>
+                        Comments:<button class="add-comment-button">+</button>
                         <div class="add-comment-div">
                             <form class="add-comment-form">
                                 <input class="new-comment" type="text" name="comments" placeholder="new comment">
