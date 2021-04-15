@@ -18,10 +18,25 @@ const upload = multer({
 })
 
 router.post('/result', upload.single('upload'), async (req, res) => {
+
     try {
         const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer()
-        const comments = [{comment: req.body.comments}]
-        const conditions = [{condition: req.body.conditions}]
+
+        const comments = []
+        for (i = 0; i < req.body.comments.length; i++) {
+            const comment = req.body.comments[i]
+            if (comment != '') {
+                comments.push({ comment })
+            }
+        }
+
+        const conditions = []
+        for (i = 0; i < req.body.conditions.length; i++) {
+            const condition = req.body.conditions[i]
+            if (condition != '') {
+                conditions.push({ condition })
+            }
+        }
 
         const result = new Result({
             picture: buffer,

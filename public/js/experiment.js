@@ -11,6 +11,41 @@ const hideDiv = () => {
     }
 }
 
+const addAnotherConditionButton = document.querySelector(".add-another-condition")
+addAnotherConditionButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    
+    const addConditionsDiv = document.querySelector('.add-conditions-div')
+    const inputCount = addConditionsDiv.getElementsByTagName('input').length + 1
+
+    const input = document.createElement('input')
+    input.type = 'text'
+    input.name = 'conditions[]'
+    input.placeholder = 'Condition ' + inputCount
+
+    const br = document.createElement('br')
+    addConditionsDiv.appendChild(input)
+    addConditionsDiv.appendChild(br)    
+})
+
+const addAnotherCommentButton = document.querySelector(".add-another-comment")
+addAnotherCommentButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    
+    const addCommentsDiv = document.querySelector('.add-comments-div')
+    const inputCount = addCommentsDiv.getElementsByTagName('input').length + 1
+
+    const input = document.createElement('input')
+    input.type = 'text'
+    input.name = 'comments[]'
+    input.placeholder = 'Comment ' + inputCount
+
+    const br = document.createElement('br')
+    addCommentsDiv.appendChild(input)
+    addCommentsDiv.appendChild(br)    
+})
+
+
 for (i = 0; i < res.length; i++) {
     const id = res[i]._id
     const resExp = res[i].experiment

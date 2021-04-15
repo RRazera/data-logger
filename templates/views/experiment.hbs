@@ -19,9 +19,19 @@
         <button id="add-result-button" onclick="hideDiv()">New Result</button>
         <div class="add-result" id="add-result-div">
             <form id="add-result-form" action="/result" method="POST" enctype="multipart/form-data">
-                <input type="file" name="upload" id="add-file" accept="image/png, image/jpg, image/jpeg" required> <br>
-                <input type="text" name="conditions" id="add-condition" placeholder="First condition"> <br>
-                <input type="text" name="comments" id="add-comment" placeholder="First comment"> <br>
+                <input type="file" name="upload" id="add-file" accept="image/png, image/jpg, image/jpeg" required>
+                <br><br>
+                <div class="add-conditions-div">
+                    Conditions:<button class="add-another-condition">+</button> <br>
+                    <input type="text" name="conditions[]" placeholder="Condition 1"> <br>
+                </div>
+
+                <div class="add-comments-div">
+                    Comments:<button class="add-another-comment">+</button> <br>
+                    <input type="text" name="comments[]" placeholder="Comment 1"> <br>
+                </div>
+
+                <br>
                 <input type="hidden" name="experiment" id="experiment-id" value={{expId}}>
                 <input type="submit" value="Submit">
             </form>
@@ -30,37 +40,37 @@
         <div class="results">
             <ul>
                 {{#each resultsArray}}
-                    <div id="{{this._id}}">
-                        <li>
-                            <img src="/result/{{this._id}}/pic" alt="no image provided">
-                            <p>Conditions:</p>
-                            <button class="add-condition-button">Add condition</button>
-                            <div class="add-condition-div">
-                                <form class="add-condition-form">
-                                    <input class="new-condition" type="text" name="conditions" placeholder="new condition">
-                                    <input type="submit" value="Submit">
-                                </form>
-                            </div>
-                            {{#each this.conditions}}
-                                <p>-{{this.condition}}</p>
-                            {{/each}}
-                            <p>Comments:</p>
-                            <button class="add-comment-button">Add comment</button>
-                            <div class="add-comment-div">
-                                <form class="add-comment-form">
-                                    <input class="new-comment" type="text" name="comments" placeholder="new comment">
-                                    <input type="submit" value="Submit">
-                                </form>
-                            </div>
-                            {{#each this.comments}}
-                                <p>-{{this.comment}}</p>
-                            {{/each}}
-                            <button class="delete-result">Delete result</button>
-                        </li>
-                    </div>
+                <div id="{{this._id}}">
+                    <li>
+                        <img src="/result/{{this._id}}/pic" alt="no image provided">
+                        <p>Conditions:</p>
+                        <button class="add-condition-button">Add condition</button>
+                        <div class="add-condition-div">
+                            <form class="add-condition-form">
+                                <input class="new-condition" type="text" name="conditions" placeholder="new condition">
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+                        {{#each this.conditions}}
+                        <p>-{{this.condition}}</p>
+                        {{/each}}
+                        <p>Comments:</p>
+                        <button class="add-comment-button">Add comment</button>
+                        <div class="add-comment-div">
+                            <form class="add-comment-form">
+                                <input class="new-comment" type="text" name="comments" placeholder="new comment">
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+                        {{#each this.comments}}
+                        <p>-{{this.comment}}</p>
+                        {{/each}}
+                        <button class="delete-result">Delete result</button>
+                    </li>
+                </div>
                 {{/each}}
             </ul>
-            
+
         </div>
     </div>
 
